@@ -18,11 +18,13 @@ function App() {
   const setInputHandler = () => {};
 
   return (
-    <>
-    <Navbar>
+    <div>
+    <Navbar className="navbar navbar-dark bg-primary">
         <NavbarBrand href="/">JSON Transform</NavbarBrand>
-      </Navbar>
-    <div className="App">
+    </Navbar>
+
+
+    <div className="App m-5">
       <div className="input-params-area">
       
 
@@ -36,6 +38,7 @@ function App() {
                 ref={textRef}
                 cols={50}
                 rows={12}
+                className="form-control"
                 onChange={prettyPrint}
               />
             </div>
@@ -49,19 +52,21 @@ function App() {
                 &nbsp;Select from already existing Mapping Files
               </label>
             </div>
-            {checked === true ? (
-              <div className="dropdown">
-                <select name="selectList" id="selectList">
+            <div className="mt-3">
+              {checked === true ? (
+                
+                <select name="selectList"  id="selectList" className="form-control">
                   <option value="option 1">SBI Mapper</option>
                   <option value="option 2">Kotak Mapper</option>
                 </select>
-              </div>
+            
             ) : (
-              <input type="file" id="myFile" name="filename" />
+              <input type="file" className="form-control" id="myFile" name="filename" />
             )}
+            </div>
           </div>
           <div className="submit-button">
-            <button className="sbmit" type="submit">
+            <button className="sbmit btn btn-primary" type="submit">
               Generate JSON Transformation Code
             </button>
           </div>
@@ -76,16 +81,17 @@ function App() {
                 id="myTextArea2"
                 cols={50}
                 rows={12}
+                className="form-control"
                 // onChange={prettyPrint}
               />
             </div>
 
-            <button className="sbmit" type="submit">
+            <button className="sbmit btn btn-success" type="submit">
               Generate Target JSON
             </button>
       </div>
     </div>
-    </>
+    </div>
   );
 }
 

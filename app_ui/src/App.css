@@ -1,13 +1,12 @@
-body{
-    padding: 10px;
-}
-
 .App{
     display: flex;
     justify-content: space-evenly;
     
 }
 
+.App div{
+    border-radius: 4%;
+}
 .input-params-area{
     background-color: aquamarine;
     padding: 20px
@@ -43,7 +42,7 @@ body{
     margin-top: 20px;
 }
 
-.dropdown{
+/* .dropdown{
     margin-top: 20px;
     margin-bottom: 20px;
-}
+} */
