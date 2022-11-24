@@ -7,7 +7,7 @@ export default function TargetJson() {
     <div class="container mt-5">
         <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h3>Target JSON output generation Code:</h3>
+        <h3>Target JSON:</h3>
         <hr/>
         
         <div class="form-group">  
@@ -15,7 +15,7 @@ export default function TargetJson() {
         </div>
         
         <div class="form-group my-3">  
-        <button type="submit" id="submit-code" class="btn btn-success">Generate Target JSON</button>
+        <button type="submit" id="submit-code" class="btn btn-success">Download Target JSON file</button>
         </div>
 
     </div>
