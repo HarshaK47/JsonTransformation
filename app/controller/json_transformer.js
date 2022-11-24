@@ -1,4 +1,4 @@
-import Transform from '../models/json_transformer'
+import Transform from '../models/json_transformer.js'
 
 const json_transformer = (req, res) => {
 
