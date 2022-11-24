@@ -12,18 +12,6 @@ import env from 'dotenv';
 env.config();
 
 
-// mongodb connection
-mongoose
-    .connect(
-        `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.qn9faxx.mongodb.net/?retryWrites=true&w=majority`,
-        {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        }
-    )
-    .then(() => {
-        console.log("Database Connected Successfully");
-    });
 
 
 
