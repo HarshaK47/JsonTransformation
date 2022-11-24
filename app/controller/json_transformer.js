@@ -2,7 +2,11 @@ import Transform from '../models/json_transformer.js'
 
 const json_transformer = (req, res) => {
 
-
+  if(!req.files)
+  {
+   console.log("error");
+   return ;
+  }
 
    if (req.files.length === 2) {
 

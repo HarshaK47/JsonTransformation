@@ -4,8 +4,6 @@ import { upload } from "../Connection/multer_GridFS.js";
 
 const router = express.Router();
 
-
-router.post("/json", upload.array('json_mappings'), json_transformer);
-
+router.post("/json",upload.array("json_mappings"), json_transformer);
 
 export default router;

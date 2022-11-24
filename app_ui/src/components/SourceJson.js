@@ -1,10 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react';
 import Axios from 'axios';
 
 export default function SourceJson() {
   const [checked, setChecked] = useState(false);
   const [file_name, setFileName] = useState("");
   const [file_names, setFileNames] = useState([]);
+  const [output_json, set_json] = useState({});
+
   const textRef = useRef("");
 
   const prettyPrint = () => {
@@ -19,31 +21,43 @@ export default function SourceJson() {
     e.preventDefault();
 
     try{
+
+      const formdata = new FormData();
+      formdata.append("json_mappings",textRef.current.value);
       await Axios.post('https://localhost:3000/transform/json', 
-      {source: textRef.current.value,
-       inputName: file_name}
+      formdata
       );
+
+    const files = await Axios.get('https://localhost:3000/file_names/fetch');
+    setFileNames(files);
+
     }
     catch(err)
     {
       console.log(err);
     }
-   
+
 
   }
 
-  useEffect( async ()=>{
-
-    try{
-      const files = await Axios.get('https://localhost:3000/file_names/fetch');
-      setFileNames(files);
+  useEffect(() => {
+    
+    async function fetchfiles() {
+      // You can await here
+      try{
+        const files = await Axios.get('https://localhost:3000/file_names/fetch');
+        setFileNames(files);
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+      
     }
-    catch(err)
-    {
-      console.log(err);
-    }
+    fetchfiles();
 
-  },[file_name])
+  }, []); 
+
 
   return (
     <div class="container mt-5">
@@ -69,16 +83,15 @@ export default function SourceJson() {
                 </div>
 
             <div className="mt-3">
-                {checked === true ? (
-                    
+                {checked === true ? (               
                     <select name="selectList"  id="selectList" className="form-control">
-                      
+
                     <option value="option 1">SBI Mapper</option>
                     <option value="option 2">Kotak Mapper</option>
                     </select>
                 
                 ) : (
-                <input type="file" className="form-control" id="myFile" name="filename" />
+                <input type="file" className="form-control" id="myFile" name="filename"  />
                 )}
             </div>
 
