@@ -1,7 +1,7 @@
 import multer from "multer";
 import crypto from "crypto";
 import path from "path";
-import GridFsStorage from "multer-gridfs-storage";
+import {GridFsStorage} from "multer-gridfs-storage";
 import Grid from "gridfs-stream";
 import mongoose from "mongoose";
 const mongoUsername=process.env.DB_USER;
