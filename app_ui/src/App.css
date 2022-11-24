@@ -1,0 +1,49 @@
+body{
+    padding: 10px;
+}
+
+.App{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.input-params-area{
+    background-color: aquamarine;
+    padding: 20px
+}
+
+.output-params-area{
+    background-color: aquamarine;
+    padding: 20px;
+    /* justify-content: end; */
+
+}
+
+.input-disp{
+    margin-left: 40px;
+}
+
+
+
+.submit-button{
+    margin-top: 60px;
+   
+}
+
+.sbmit{
+    border-radius: 10px;
+}
+
+.text-area{
+    display: block;
+}
+
+.checkBox-input{
+    margin-top: 20px;
+}
+
+.dropdown{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
