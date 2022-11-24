@@ -6,7 +6,7 @@ import Axios from 'axios';
 export default function SourceJson(props) {
   const [checked, setChecked] = useState(false);
   const [file_name, setFileName] = useState("A");
-  const [file_names, setFileNames] = useState([]);
+  const [file_names, setFileNames] = useState(['SBI', 'Kotak']);
   const textRef = useRef("");
 
   const prettyPrint = () => {
@@ -39,17 +39,22 @@ export default function SourceJson(props) {
 
     props.collectInput(textRef.current.value);
   }
-  // useEffect(async () => {
+  useEffect(() => {
 
-  //   try {
-  //     const files = await Axios.get('https://localhost:3000/file_names/fetch');
-  //     setFileNames(files);
-  //   }
-  //   catch (err) {
-  //     console.log(err);
-  //   }
+    async function fetchfiles() {
+      // You can await here
+      try {
+        const files = await Axios.get('https://localhost:3000/file_names/fetch');
+        setFileNames(files);
+      }
+      catch (err) {
+        console.log(err);
+      }
 
-  // })
+    }
+    fetchfiles();
+
+  }, []);
   return (
     <div class="container mt-5">
       <div class="row">
@@ -76,9 +81,13 @@ export default function SourceJson(props) {
             <div className="mt-3">
               {checked === true ? (
 
-                <select name="selectList" id="selectList" className="form-control">
-                  <option value="option 1">SBI Mapper</option>
-                  <option value="option 2">Kotak Mapper</option>
+                <select name="selectList" id="selectList" className="form-control" onChange={(e) => { setFileName(e.target.value) }}>
+                  {file_names.map((fn) => {
+                    return (
+                      <option value={fn}>{fn}</option>
+                    );
+                  })}
+
                 </select>
 
               ) : (
