@@ -32,6 +32,7 @@ const storage = new GridFsStorage({
           return reject(err);
         }
         const filename = buf.toString('hex') + path.extname(file.originalname);
+
         const fileInfo = {
           filename: filename,
           bucketName: "uploads" // same as collection name
@@ -39,6 +40,7 @@ const storage = new GridFsStorage({
         resolve(fileInfo);
       });
     });
+  });
   }
 });
 const upload = multer({ storage });
