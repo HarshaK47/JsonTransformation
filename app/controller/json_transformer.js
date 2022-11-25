@@ -6,42 +6,48 @@ import fs from 'fs';
 // import { } from 'dotenv/config'
 
 
-// const spawnProcess = (source, mapping) => {
+const spawnProcess = (source, mapping) => {
 
-//    // spawn process
+   // spawn process
 
-//    // handle response and database query and model prediction
-//    var dataToSend
-//    // spawn new child process to call the python script
 
-//    let args = 
-//    {
-//       src: source,
-//       map: mapping
-//    }
+   var dataToSend
+   // spawn new child process to call the python script
 
-//    // args.unshift(process.env.PYTHON_FILE)
-//    const python = spawn(process.env.PYTHON_PATH, [
-//       '-u', process.env.PYTHON_FILE,
-//       args
+   let args =
+      JSON.stringify({
+         'src': source,
+         'map': mapping
+      })
 
-//    ])
-//    // collect data from script
-//    python.stdout.on('data', function (data) {
+   // args.unshift(process.env.PYTHON_FILE)
+   console.log("args -->", args);
+   const python = spawn(process.env.PYTHON_PATH, [
+      process.env.PYTHON_FILE,
+      args
 
-//       dataToSend = data.toString()
-//       return dataToSend;
-//    })
-//    python.stderr.on('data', function (data) {
-//       console.log(data.toString())
-//    })
-//    // in close event we are sure that stream from child process is closed
-//    python.on('close', (code) => {
-//       console.log(`child process close all stdio with code ${code}`)
-//       // send data to browser
-//    })
+   ])
+   // collect data from script
+   python.stdout.on('data', function (data) {
 
-// }
+      dataToSend = data.toString()
+      // console.log("data -->", dataToSend);
+      return dataToSend;
+   })
+   python.stderr.on('data', function (data) {
+      console.log(data.toString())
+      return data.toString();
+   })
+   // in close event we are sure that stream from child process is closed
+   python.on('close', (code) => {
+
+      console.log(`child process close all stdio with code ${code}`)
+      return `child process close all stdio with code ${code}`
+
+      // send data to browser
+   })
+
+}
 
 
 // let options = {
@@ -52,29 +58,29 @@ import fs from 'fs';
 //    args: []
 // };
 
-const spawnProcess = (source, mapping) => {
+// const spawnProcess = (source, mapping) => {
 
-   let options = {
-      // mode: 'text',
-      pythonPath: process.env.PYTHON_PATH,
-      pythonOptions: ['-u'], // get print results in real-time
-      scriptPath: process.env.PYTHON_FILE,
-      args: [source, mapping]
-   };
+//    let options = {
+//       // mode: 'text',
+//       pythonPath: process.env.PYTHON_PATH,
+//       pythonOptions: ['-u'], // get print results in real-time
+//       scriptPath: process.env.PYTHON_FILE,
+//       args: [source, mapping]
+//    };
 
-   PythonShell.run(process.env.PYTHON_FILE, options, function (err, results) {
-      if (err) throw err;
-      // results is an array consisting of messages collected during execution
-      console.log('results: %j', results);
-   });
-}
+//    PythonShell.run(process.env.PYTHON_FILE, options, function (err, results) {
+//       if (err) throw err;
+//       // results is an array consisting of messages collected during execution
+//       console.log('results: %j', results);
+//    });
+// }
 
 
 
 const json_transformer = (req, res) => {
 
 
-   // console.log(req);
+   console.log(req.file);
    // console.log(req.body.inputName);
    if (req?.file && Object.keys(req.file).length > 0) {
 
@@ -126,6 +132,8 @@ const json_transformer = (req, res) => {
                // fs.writeFileSync('D:\\Projects\\STG_India_Hackathon\\JsonTransformation\\app\\uploads\\source.json', JSON.stringify(parsedSource), (err) => {
                //    if (err) throw err
                //    console.log("File Saved");
+
+               console.log(parsedSource, path);
                const jsonResult = spawnProcess(parsedSource, path)
                // })
 

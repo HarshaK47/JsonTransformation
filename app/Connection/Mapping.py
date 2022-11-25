@@ -14,16 +14,15 @@ import pydash
 import sys
 import re
 
-# map_path = "D:\\Projects\\STG_India_Hackathon\\JsonTransformation\\data\\sample_1\\mapping.csv"
+map_path = "D:\\Projects\\STG_India_Hackathon\\JsonTransformation\\data\\sample_1\\mapping.csv"
 # source_path = "D:\\Projects\\STG_India_Hackathon\\JsonTransformation\\data\\sample_1\\source.json"
-# src_data = '{"id":"122-34-6543","firstName":"Leanne","lastName":"Graham","address":{"street":"Kulas Light","suite":"Apt. 556","city":"Gwenborough","zipcode":"92998-3874"},"occupation":"self-employed","age":29}'
+src_data = '{"id":"122-34-6543","firstName":"Leanne","lastName":"Graham","address":{"street":"Kulas Light","suite":"Apt. 556","city":"Gwenborough","zipcode":"92998-3874"},"occupation":"self-employed","age":29}'
 
-map_path = ""
-src_data = ""
+# map_path = ""
+# src_data = ""
 
 
 def main():
-
     mapping = [[]]
     with open(str(map_path), 'r') as f:
         reader = csv.reader(f)
@@ -71,7 +70,7 @@ def main():
                 t = removeDot(t)
                 t = pydash.get(source_data, t)
                 enum = json.loads(enum)
-                query_output = enum[t]
+                query_output = enum[t] if t != None else ""
             elif 'if' in query.lower():
                 if 'item' in query.lower():
                     continue                               # will handle latter
@@ -202,6 +201,8 @@ def main():
                 "if(")+3:query.lower().index(".item")].strip()
             prefix = prefix[0].lower()+prefix[1:]
             obj = pydash.get(source_data, prefix)
+
+            # if obj is not None:
             for item in obj:
                 x += 1
                 st = 0
@@ -259,14 +260,14 @@ def main():
             pydash.objects.set_(target_data, target_query, st)
 
     json_object = json.dumps(target_data)
-    return json_object
+
+    sys.stdout.write(json_object)
 
 
 if __name__ == "__main__":
     # print(main())
-    print("this-->", (sys.argv))
-    print(sys.argv[1])
-    map_path = json.loads((sys.argv[0]))
-    source_path = json.loads((sys.argv[1]))
-    # print("what")
-    sys.stdout.write(str(main()))
+    args = str(sys.argv[1].rstrip())
+    args = json.loads(args.rstrip())
+    map_path = args["map"].rstrip()
+    source_data = args["src"]
+    main()
