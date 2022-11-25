@@ -1,5 +1,5 @@
 import { } from 'dotenv/config'
-
+import cors from "cors";
 import express from "express";
 import "./Connection/mongodb.js";// must be called before others 
 
@@ -15,6 +15,7 @@ const app = express();
 
 //middlewares
 app.use(express.json());
+app.use(cors());
 // app.use('/generate',code_generator);
 app.use('/transform', json_transformer);
 app.use('/file_names', file_names);
