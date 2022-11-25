@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const transformSchema = new mongoose.Schema(
     {
         name: {
@@ -27,4 +28,6 @@ const transformSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.model("Transform", transformSchema);
+const Transform = mongoose.model("Transform", transformSchema);
+
+export default Transform;
