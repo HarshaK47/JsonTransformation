@@ -1,4 +1,5 @@
 import { } from 'dotenv/config'
+import cors from "cors";
 import express from "express";
 import "./Connection/mongodb.js";// must be called before others 
 import path from 'path'
@@ -8,8 +9,9 @@ const __dirname = path.dirname(__filename);
 
 //routes
 import json_transformer from './routes/json_transformer.js';
-import env from 'dotenv';
+import file_names from './routes/file_names.js';
 
+import env from 'dotenv';
 
 env.config();
 const app = express();
@@ -17,8 +19,12 @@ const app = express();
 
 //middlewares
 app.use(express.json());
+
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
+app.use(cors());
+// app.use('/generate',code_generator);
 app.use('/transform', json_transformer);
+app.use('/file_names', file_names);
 
 
 

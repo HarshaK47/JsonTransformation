@@ -50,30 +50,7 @@ const spawnProcess = (source, mapping) => {
 }
 
 
-// let options = {
-//    mode: 'text',
-//    pythonPath: process.env.PYTHON_PATH,
-//    pythonOptions: ['-u'], // get print results in real-time
-//    scriptPath: process.env.PYTHON_FILE,
-//    args: []
-// };
 
-// const spawnProcess = (source, mapping) => {
-
-//    let options = {
-//       // mode: 'text',
-//       pythonPath: process.env.PYTHON_PATH,
-//       pythonOptions: ['-u'], // get print results in real-time
-//       scriptPath: process.env.PYTHON_FILE,
-//       args: [source, mapping]
-//    };
-
-//    PythonShell.run(process.env.PYTHON_FILE, options, function (err, results) {
-//       if (err) throw err;
-//       // results is an array consisting of messages collected during execution
-//       console.log('results: %j', results);
-//    });
-// }
 
 
 
@@ -127,11 +104,7 @@ const json_transformer = (req, res) => {
 
                console.log(parsedSource);
 
-               // const jsonResult = spawnProcess
-               // let jsonResult;
-               // fs.writeFileSync('D:\\Projects\\STG_India_Hackathon\\JsonTransformation\\app\\uploads\\source.json', JSON.stringify(parsedSource), (err) => {
-               //    if (err) throw err
-               //    console.log("File Saved");
+              
 
                console.log(parsedSource, path);
                const jsonResult = spawnProcess(parsedSource, path)
