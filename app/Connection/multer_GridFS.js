@@ -13,11 +13,11 @@ const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(path.join(path.dirname(__dirname), "uploads"));
+
     cb(null, path.join(path.dirname(__dirname), "uploads"));
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, String(Date.now()) + '-' + file.originalname);
   },
 });
 

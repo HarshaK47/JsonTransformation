@@ -11,4 +11,4 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() => console.log("connected")).catch(err => console.log(err));
+    .then(() => console.log("Connected To DataBase")).catch(err => console.log(err));
