@@ -1,13 +1,13 @@
 import multer from "multer";
-// import crypto from "crypto";
+import crypto from "crypto";
 import path from "path";
 import { fileURLToPath } from 'url';
-// import GridFsStorage from "multer-gridfs-storage";
+// import {GridFsStorage} from "multer-gridfs-storage";
 // import Grid from "gridfs-stream";
-// import mongoose from "mongoose";
-// const mongoUsername = process.env.DB_USER;
-// const mongoPassword = process.env.DB_PASS;
-// const mongoURI = `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.qn9faxx.mongodb.net/?retryWrites=true&w=majority`;
+import mongoose from "mongoose";
+const mongoUsername = process.env.DB_USER;
+const mongoPassword = process.env.DB_PASS;
+const mongoURI = `mongodb+srv://${mongoUsername}:${mongoPassword}@cluster0.qn9faxx.mongodb.net/?retryWrites=true&w=majority`;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -36,7 +36,7 @@ export const upload = multer({
 });
 
 
-// connection for gfs
+//connection for gfs
 // const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 // let gfs;//init gfs
 // let gridFSBucket;
@@ -68,7 +68,6 @@ export const upload = multer({
 //       });
 //     });
 //   }
-
 // });
 
 // const upload = multer({ storage });
